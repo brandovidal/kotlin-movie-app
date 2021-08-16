@@ -1,4 +1,4 @@
-package com.brandovidal.movieapp.ui
+package com.brandovidal.movieapp.ui.moviedetails
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
