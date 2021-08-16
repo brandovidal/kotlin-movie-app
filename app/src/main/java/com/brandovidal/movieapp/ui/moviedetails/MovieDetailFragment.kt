@@ -1,8 +1,9 @@
-package com.brandovidal.movieapp
+package com.brandovidal.movieapp.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import com.brandovidal.movieapp.R
 import com.brandovidal.movieapp.databinding.FragmentMovieDetailBinding
 
 class MovieDetailFragment : Fragment(R.layout.fragment_movie_detail) {
