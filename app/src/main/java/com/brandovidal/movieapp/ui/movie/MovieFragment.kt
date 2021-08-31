@@ -21,6 +21,8 @@ import com.brandovidal.movieapp.ui.movie.adapters.MovieAdapter
 import com.brandovidal.movieapp.ui.movie.adapters.concat.PopularConcatAdapter
 import com.brandovidal.movieapp.ui.movie.adapters.concat.TopRatedConcatAdapter
 import com.brandovidal.movieapp.ui.movie.adapters.concat.UpcomingConcatAdapter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class MovieFragment : Fragment(R.layout.fragment_movie), MovieAdapter.OnMovieClickListener {
     private lateinit var binding: FragmentMovieBinding

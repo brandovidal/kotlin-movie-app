@@ -3,6 +3,7 @@ package com.brandovidal.movieapp.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
 import com.brandovidal.movieapp.core.Resource
 import com.brandovidal.movieapp.repository.MovieRepository
 import kotlinx.coroutines.Dispatchers
@@ -10,7 +11,7 @@ import java.lang.Exception
 
 class MovieViewModel(private val repo: MovieRepository) : ViewModel() {
 
-    fun fetchMainScreenMovies() = liveData(Dispatchers.IO) {
+    fun fetchMainScreenMovies() = liveData(viewModelScope.coroutineContext + Dispatchers.Main) {
         emit(Resource.Loading())
 
         try {
