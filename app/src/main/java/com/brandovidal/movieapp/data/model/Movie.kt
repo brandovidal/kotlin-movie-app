@@ -69,15 +69,32 @@ fun MovieEntity.toMovie(): Movie = Movie(
     this.id,
     this.adult,
     this.backdrop_path,
-    this.poster_path,
     this.original_title,
-    this.original_title,
-    this.popularity,
+    this.original_language,
     this.overview,
+    this.popularity,
     this.poster_path,
     this.release_date,
+    this.title,
     this.video,
     this.vote_average,
     this.voteCount,
     this.movie_type
+)
+
+fun Movie.toMovieEntity(movieType: String): MovieEntity = MovieEntity(
+    this.id,
+    this.adult,
+    this.backdrop_path,
+    this.original_title,
+    this.original_language,
+    this.overview,
+    this.popularity,
+    this.poster_path,
+    this.release_date,
+    this.title,
+    this.video,
+    this.vote_average,
+    this.voteCount,
+    movie_type = movieType
 )
