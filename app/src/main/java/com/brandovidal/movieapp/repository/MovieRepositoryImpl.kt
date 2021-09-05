@@ -1,5 +1,7 @@
 package com.brandovidal.movieapp.repository
 
+import android.util.Log
+import com.brandovidal.movieapp.core.InternetCheck
 import com.brandovidal.movieapp.data.local.LocalMovieDatabase
 import com.brandovidal.movieapp.data.model.MovieList
 import com.brandovidal.movieapp.data.model.toMovieEntity
@@ -10,23 +12,35 @@ class MovieRepositoryImpl(
     private val dataSourceLocal: LocalMovieDatabase
 ) : MovieRepository {
     override suspend fun getUpcomingMovies(): MovieList {
-        dataSourceRemote.getUpcomingMovies().results.forEach { movie ->
-            dataSourceLocal.saveMovie(movie.toMovieEntity("upcoming"))
+        return if (InternetCheck.isNetworkAvailable()) {
+            dataSourceRemote.getUpcomingMovies().results.forEach { movie ->
+                dataSourceLocal.saveMovie(movie.toMovieEntity("upcoming"))
+            }
+            return dataSourceLocal.getUpcomingMovies()
+        } else {
+            dataSourceLocal.getUpcomingMovies()
         }
-        return dataSourceLocal.getUpcomingMovies()
     }
 
     override suspend fun getTopRatedMovies(): MovieList {
-        dataSourceRemote.getTopRatedMovies().results.forEach { movie ->
-            dataSourceLocal.saveMovie(movie.toMovieEntity("toprated"))
+        return if (InternetCheck.isNetworkAvailable()) {
+            dataSourceRemote.getTopRatedMovies().results.forEach { movie ->
+                dataSourceLocal.saveMovie(movie.toMovieEntity("toprated"))
+            }
+            return dataSourceLocal.getTopRatedMovies()
+        } else {
+            dataSourceLocal.getTopRatedMovies()
         }
-        return dataSourceLocal.getTopRatedMovies()
     }
 
     override suspend fun getPopularMovies(): MovieList {
-        dataSourceRemote.getPopularMovies().results.forEach { movie ->
-            dataSourceLocal.saveMovie(movie.toMovieEntity("popular"))
-        }
+        return if (InternetCheck.isNetworkAvailable()) {
+            dataSourceRemote.getPopularMovies().results.forEach { movie ->
+                dataSourceLocal.saveMovie(movie.toMovieEntity("popular"))
+            }
         return dataSourceLocal.getPopularMovies()
+        } else {
+            dataSourceLocal.getPopularMovies()
+        }
     }
 }
