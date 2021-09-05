@@ -7,7 +7,6 @@ import androidx.room.PrimaryKey
 data class Movie(
     val id: Int = -1,
     val adult: Boolean = false,
-    val genre_ids: List<Int> = listOf(),
     val backdrop_path: String = "",
     val original_title: String = "",
     val original_language: String = "",
@@ -18,7 +17,8 @@ data class Movie(
     val title: String = "",
     val video: Boolean = false,
     val vote_average: Double = -1.0,
-    val voteCount: Int = -1
+    val voteCount: Int = -1,
+    val movie_type: String = ""
 )
 
 data class MovieList(val results: List<Movie> = listOf())
@@ -52,5 +52,32 @@ data class MovieEntity(
     @ColumnInfo(name = "vote_average")
     val vote_average: Double = -1.0,
     @ColumnInfo(name = "voteCount")
-    val voteCount: Int = -1
+    val voteCount: Int = -1,
+    @ColumnInfo(name="movie_type")
+    val movie_type: String = ""
+)
+
+fun List<MovieEntity>.toMovieList(): MovieList {
+    val resultList = mutableListOf<Movie>()
+    this.forEach { movieEntity ->
+        resultList.add(movieEntity.toMovie())
+    }
+    return MovieList(resultList)
+}
+
+fun MovieEntity.toMovie(): Movie = Movie(
+    this.id,
+    this.adult,
+    this.backdrop_path,
+    this.poster_path,
+    this.original_title,
+    this.original_title,
+    this.popularity,
+    this.overview,
+    this.poster_path,
+    this.release_date,
+    this.video,
+    this.vote_average,
+    this.voteCount,
+    this.movie_type
 )

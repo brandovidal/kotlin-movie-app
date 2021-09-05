@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.ConcatAdapter
 import com.brandovidal.movieapp.R
 import com.brandovidal.movieapp.core.Resource
 import com.brandovidal.movieapp.data.model.Movie
-import com.brandovidal.movieapp.data.remote.MovieDataSource
+import com.brandovidal.movieapp.data.remote.RemoteMovieDataSource
 import com.brandovidal.movieapp.databinding.FragmentMovieBinding
 import com.brandovidal.movieapp.presentation.MovieViewModel
 import com.brandovidal.movieapp.presentation.MovieViewModelFactory
@@ -21,15 +21,13 @@ import com.brandovidal.movieapp.ui.movie.adapters.MovieAdapter
 import com.brandovidal.movieapp.ui.movie.adapters.concat.PopularConcatAdapter
 import com.brandovidal.movieapp.ui.movie.adapters.concat.TopRatedConcatAdapter
 import com.brandovidal.movieapp.ui.movie.adapters.concat.UpcomingConcatAdapter
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 class MovieFragment : Fragment(R.layout.fragment_movie), MovieAdapter.OnMovieClickListener {
     private lateinit var binding: FragmentMovieBinding
     private val viewModel by viewModels<MovieViewModel> {
         MovieViewModelFactory(
             MovieRepositoryImpl(
-                MovieDataSource(RetrofitClient.webservice)
+                RemoteMovieDataSource(RetrofitClient.webservice)
             )
         )
     }
