@@ -31,7 +31,6 @@ data class MovieEntity(
     val id: Int = -1,
     @ColumnInfo(name = "adult")
     val adult: Boolean = false,
-//    val genre_ids: List<Int> = listOf(),
     @ColumnInfo(name = "backdrop_path")
     val backdrop_path: String = "",
     @ColumnInfo(name = "original_title")
